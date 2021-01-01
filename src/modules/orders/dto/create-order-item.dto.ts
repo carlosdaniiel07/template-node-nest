@@ -1,6 +1,6 @@
 import { IsNotEmpty, IsPositive } from "class-validator";
 
-export class CreateOrderItemDTO {
+export class CreateOrderItemDto {
   @IsNotEmpty()
   product: string
 

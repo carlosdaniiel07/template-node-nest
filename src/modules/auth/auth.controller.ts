@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from "@nestjs/common";
 
 import { AuthService } from "./auth.service";
-import { GetAuthDTO } from "./dto/GetAuthDTO";
-import { LoginDTO } from "./dto/LoginDTO";
-import { LoginResponseDTO } from "./dto/LoginResponseDTO";
-import { SignUpDTO } from "./dto/SignUpDTO";
+import { GetAuthDto } from "./dto/get-auth.dto";
+import { LoginDto } from "./dto/login.dto";
+import { LoginResponseDto } from "./dto/login-response.dto";
+import { SignUpDto } from "./dto/sign-up.dto";
 
 @Controller()
 export class AuthController {
@@ -13,12 +13,12 @@ export class AuthController {
   ) {}
 
   @Post('sign-up')
-  async signUp(@Body() signUpDTO: SignUpDTO): Promise<GetAuthDTO> {
-    return await this.service.signUp(signUpDTO)
+  async signUp(@Body() signUpDto: SignUpDto): Promise<GetAuthDto> {
+    return await this.service.signUp(signUpDto)
   }
 
   @Post('login')
-  async login(@Body() loginDTO: LoginDTO): Promise<LoginResponseDTO> {
-    return await this.service.login(loginDTO)
+  async login(@Body() loginDto: LoginDto): Promise<LoginResponseDto> {
+    return await this.service.login(loginDto)
   }
 }

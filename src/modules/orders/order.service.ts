@@ -2,8 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
-import { ApiException } from "src/exceptions/ApiException";
-import { CreateOrderDTO } from "./dto/CreateOrderDTO";
+import { ApiException } from "src/models/api-exception.model";
+import { CreateOrderDto } from "./dto/create-order.dto";
 import { OrderItem } from "./order-item.entity";
 import { OrderItemService } from "./order-item.service";
 import { OrderStatus } from "./order-status.enum";
@@ -30,8 +30,8 @@ export class OrderService {
     return order
   }
 
-  async create(createOrderDTO: CreateOrderDTO): Promise<any> {
-    const { customer, address, items } = createOrderDTO
+  async create(createOrderDto: CreateOrderDto): Promise<any> {
+    const { customer, address, items } = createOrderDto
     
     const orderItems: OrderItem[] = items.map(({ product, unitPrice, quantity }) => ({ product, unitPrice, quantity, value: unitPrice * quantity }))
     const order: Order = {

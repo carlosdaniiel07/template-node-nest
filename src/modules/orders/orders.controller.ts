@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, UseGuards } from "@nestjs/c
 import { Roles } from "src/decorators/roles.decorator";
 import { AuthGuard } from "src/guards/auth.guard";
 import { AuthRole } from "../auth/auth-role.enum";
-import { CreateOrderDTO } from "./dto/CreateOrderDTO";
+import { CreateOrderDto } from "./dto/create-order.dto";
 import { Order } from "./order.entity";
 import { OrderService } from "./order.service";
 
@@ -24,8 +24,8 @@ constructor(
   }
 
   @Post()
-  async save(@Body() createOrderDTO: CreateOrderDTO): Promise<any> {
-    return await this.service.create(createOrderDTO)
+  async save(@Body() createOrderDto: CreateOrderDto): Promise<any> {
+    return await this.service.create(createOrderDto)
   }
 
   @Delete(':id')

@@ -1,8 +1,8 @@
 import { Type } from "class-transformer";
 import { ArrayNotEmpty, IsNotEmpty, ValidateNested } from "class-validator";
-import { CreateOrderItemDTO } from "./CreateOrderItemDTO";
+import { CreateOrderItemDto } from "./create-order-item.dto";
 
-export class CreateOrderDTO {
+export class CreateOrderDto {
   @IsNotEmpty()
   customer: string
 
@@ -11,6 +11,6 @@ export class CreateOrderDTO {
 
   @ArrayNotEmpty()
   @ValidateNested({ each: true })
-  @Type(() => CreateOrderItemDTO)
-  items: CreateOrderItemDTO[]
+  @Type(() => CreateOrderItemDto)
+  items: CreateOrderItemDto[]
 }

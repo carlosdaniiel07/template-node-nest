@@ -1,6 +1,6 @@
 import { Column, Entity } from "typeorm";
 
-import { BaseEntity } from "src/models/BaseEntity";
+import { BaseEntity } from "src/models/base-entity.model";
 import { AuthRole } from "src/modules/auth/auth-role.enum";
 
 @Entity()

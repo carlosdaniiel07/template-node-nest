@@ -6,11 +6,11 @@ import { hashSync, compareSync } from "bcrypt"
 import { sign, verify, decode } from "jsonwebtoken"
 
 import { Auth } from "./auth.entity";
-import { LoginDTO } from "./dto/LoginDTO";
-import { LoginResponseDTO } from "./dto/LoginResponseDTO";
-import { ApiException } from "src/exceptions/ApiException";
-import { SignUpDTO } from "./dto/SignUpDTO";
-import { GetAuthDTO } from "./dto/GetAuthDTO";
+import { LoginDto } from "./dto/login.dto";
+import { LoginResponseDto } from "./dto/login-response.dto";
+import { ApiException } from "src/models/api-exception.model";
+import { SignUpDto } from "./dto/sign-up.dto";
+import { GetAuthDto } from "./dto/get-auth.dto";
 
 @Injectable()
 export class AuthService {
@@ -18,8 +18,8 @@ export class AuthService {
     @InjectRepository(Auth) private repository: Repository<Auth>
   ) {}
 
-  async signUp(signUpDTO: SignUpDTO): Promise<GetAuthDTO> {
-    const { email, password, role } = signUpDTO
+  async signUp(signUpDto: SignUpDto): Promise<GetAuthDto> {
+    const { email, password, role } = signUpDto
     const auth = await this.repository.findOne({ where: { email } })
 
     if (auth) {
@@ -31,8 +31,8 @@ export class AuthService {
     return { id: createdAuth.id, email }
   }
 
-  async login(authDTO: LoginDTO): Promise<LoginResponseDTO> {
-    const { email, password } = authDTO
+  async login(authDto: LoginDto): Promise<LoginResponseDto> {
+    const { email, password } = authDto
     const auth = await this.repository.findOne({ where: { email } })
 
     if (!auth) {

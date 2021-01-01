@@ -1,4 +1,4 @@
-import { BaseEntity } from "src/models/BaseEntity";
+import { BaseEntity } from "src/models/base-entity.model";
 import { Column, Entity, OneToMany } from "typeorm";
 import { OrderItem } from "./order-item.entity";
 import { OrderStatus } from "./order-status.enum";

@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { Request } from "express";
 import { Observable } from "rxjs";
-import { ApiException } from "src/exceptions/ApiException";
+import { ApiException } from "src/models/api-exception.model";
 
 import { AuthRole } from "src/modules/auth/auth-role.enum";
 import { AuthService } from "src/modules/auth/auth.service";
