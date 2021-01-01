@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
+import { Propagation, Transactional } from "typeorm-transactional-cls-hooked";
 
 import { ApiException } from "src/models/api-exception.model";
 import { CreateOrderDto } from "./dto/create-order.dto";
@@ -44,6 +45,7 @@ export class OrderService {
     return await this.repository.save(order)
   }
 
+  @Transactional({ propagation: Propagation.REQUIRED })
   async delete(orderId: string): Promise<any> {
     await this.findById(orderId)
     
