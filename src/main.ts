@@ -5,6 +5,7 @@ import { initializeTransactionalContext, patchTypeORMRepositoryWithBaseRepositor
 
 import { AppModule } from './app.module';
 import { GlobalErrorHandler } from './middlewares/global-error-handler.middleware';
+import { LoggingMiddleware } from './middlewares/logging.middleware';
 
 async function bootstrap() {
   initializeTransactionalContext()
@@ -15,6 +16,7 @@ async function bootstrap() {
   app.enableCors({ origin: '*' })
   app.useGlobalFilters(new GlobalErrorHandler())
   app.useGlobalPipes(new ValidationPipe())
+  app.useGlobalInterceptors(new LoggingMiddleware())
 
   await app.listen(3000);
 }
