@@ -5,7 +5,6 @@ import { Repository } from "typeorm";
 import { ApiException } from "src/models/api-exception.model";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { OrderItem } from "./order-item.entity";
-import { OrderItemService } from "./order-item.service";
 import { OrderStatus } from "./order-status.enum";
 import { Order } from "./order.entity";
 
@@ -13,7 +12,7 @@ import { Order } from "./order.entity";
 export class OrderService {
   constructor(
     @InjectRepository(Order) private repository: Repository<Order>,
-    private orderItemService: OrderItemService
+    @InjectRepository(OrderItem) private orderItemRepository: Repository<OrderItem>,
   ) {}
 
   async findAll(): Promise<Order[]> {
@@ -47,8 +46,9 @@ export class OrderService {
 
   async delete(orderId: string): Promise<any> {
     await this.findById(orderId)
-    await this.orderItemService.deleteByOrder(orderId)
-    await this.repository.delete({ id: orderId })
+    
+    await this.repository.softDelete({ id: orderId })
+    await this.orderItemRepository.softDelete({ order: { id: orderId } })
 
     return { success: true }
   }
